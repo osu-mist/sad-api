@@ -1,6 +1,6 @@
-# Web API Skeleton
+# Student Application Decision Web API
 
-Skeleton for Dropwizard Web APIs.
+Web API for creating, reading, updating, and deleting student application decision codes.
 
 
 ## Tasks
@@ -17,6 +17,10 @@ Generate IntelliJ IDEA project:
 
 Open with `File` -> `Open Project`.
 
+### Oracle Driver
+
+Download `ojdbc6_g.jar` from [Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) and save in `bin/` directory.
+
 ### Build
 
 Build the project:
@@ -29,25 +33,7 @@ JARs [will be saved](https://github.com/johnrengelman/shadow#using-the-default-p
 
 Run the project:
 
-    $ gradle run
-
-
-## Base an Existing Project off the Skeleton
-
-1. Add the skeleton as a remote:
-
-        $ git remote add skeleton https://github.com/osu-mist/web-api-skeleton.git
-
-2. Create a branch to track the skeleton:
-
-        $ git checkout -b skeleton-master skeleton/master
-
-3. Merge the skeleton into your codebase:
-
-        $ git checkout feature/abc-123-branch
-        $ git merge skeleton-master
-        ...
-        $ git commit -v
+    $ java -classpath bin/ojdbc6_g.jar:build/libs/sad-api-all.jar edu.oregonstatemist.sadapi.SadApplication server configuration.yaml
 
 
 ## Resources
@@ -58,13 +44,11 @@ The Web API definition is contained in the [Swagger specification](swagger.yaml)
 
 This sample resource returns a short message:
 
-    $ nc localhost 8008 << HERE
-    > GET / HTTP/1.0
-    > 
-    > HERE
-    HTTP/1.1 200 OK
-    Date: Mon, 20 Jul 2015 21:51:49 GMT
-    Content-Type: text/plain
-    Content-Length: 11
-    
-    hello world
+    $ curl --ipv4 localhost:8888
+    goodbye world
+
+### POST
+
+### PUT
+
+### DELETE

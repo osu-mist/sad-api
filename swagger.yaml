@@ -1,11 +1,11 @@
 swagger: '2.0'
 info:
-  title: Web API Skeleton
-  description: Skeleton for Dropwizard Web APIs
+  title: Student Application Decision Web API
+  description: Web API for creating, reading, updating, and deleting student application decision codes.
   version: '0.0'
 externalDocs:
   description: GitHub Repository
-  url: https://github.com/osu-mist/web-api-skeleton
+  url: https://github.com/osu-mist/sad-api
 host: localhost
 schemes:
   - http
@@ -19,3 +19,6 @@ paths:
           description: A short message
           schema:
             type: string
+    post:
+    put:
+    delete:
