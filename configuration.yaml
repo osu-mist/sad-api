@@ -5,7 +5,7 @@
 server:
   applicationConnectors:
     - type: http
-      port: 8008
+      port: 8888
       bindHost: localhost
 #
 ## Example HTTPS configuration
