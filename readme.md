@@ -33,7 +33,11 @@ JARs [will be saved](https://github.com/johnrengelman/shadow#using-the-default-p
 
 Run the project:
 
-    $ java -classpath bin/ojdbc6_g.jar:build/libs/sad-api-all.jar edu.oregonstate.mist.sadapi.SadApplication server configuration.yaml
+    $ gradle run
+
+or
+
+    $ java -classpath build/libs/sad-api-all.jar edu.oregonstate.mist.sadapi.SadApplication server configuration.yaml
 
 
 ## Resources
