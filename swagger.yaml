@@ -22,3 +22,12 @@ paths:
     post:
     put:
     delete:
+  /{pidm}:
+    get:
+      summary: Get all
+      description: Get all student application decisions for a given pidm
+      responses:
+        200:
+          description: ok
+          schema:
+            type: application/json
