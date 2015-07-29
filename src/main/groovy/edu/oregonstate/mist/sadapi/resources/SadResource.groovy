@@ -8,9 +8,9 @@ import javax.ws.rs.core.MediaType
 
 @Path('/')
 class SadResource {
-    SadDAO sadDAO
+    private SadDAO sadDAO
 
-    SadResource(SadDAO sadDAO) {
+    public SadResource(SadDAO sadDAO) {
         this.sadDAO = sadDAO
     }
 
