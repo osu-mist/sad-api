@@ -49,7 +49,7 @@ The Web API definition is contained in the [Swagger specification](swagger.yaml)
 Return one student application decision for a given pidm, term code, application number, and sequence number:
 
     $ nc localhost 8888 << HERE
-    > GET /1320366?termCodeEntry=201600&applNo=1&seqNo=1 HTTP/1.0
+    > GET /api/v0/1320366?termCodeEntry=201600&applNo=1&seqNo=1 HTTP/1.0
     > 
     > HERE
     HTTP/1.1 200 OK
@@ -64,7 +64,7 @@ Return one student application decision for a given pidm, term code, application
 Return all student application decisions for a given pidm:
 
     $ nc localhost 8888 << HERE
-    > GET /1320366 HTTP/1.0
+    > GET /api/v0/1320366 HTTP/1.0
     > 
     > HERE
     HTTP/1.1 200 OK
