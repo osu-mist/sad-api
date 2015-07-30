@@ -30,6 +30,10 @@ class SadDAO implements Managed {
         connection = handle.getConnection()
     }
 
+    public void stop() {
+        handle.close()
+    }
+
     public List<Sad> queryAll(Long pidm) {
         String query = '''BEGIN
                             ? := SB_APPLICATION_DECISION.f_query_all(?);
@@ -74,9 +78,5 @@ class SadDAO implements Managed {
                 user:          rs.getString('sarappd_user'),
                 dataOrigin:    rs.getString('sarappd_data_origin')
         )
-    }
-
-    public void stop() {
-        handle.close()
     }
 }
