@@ -25,11 +25,18 @@ class SadResource {
                        @QueryParam('termCodeEntry') String termCodeEntry,
                        @QueryParam('applNo') Long applNo,
                        @QueryParam('seqNo') Long seqNo) {
-        if (termCodeEntry && applNo && seqNo)
-            return sadDAO.queryOne(pidm, termCodeEntry, applNo, seqNo)
-        else if (termCodeEntry || applNo || seqNo)
+        Object result
+        if (termCodeEntry && applNo && seqNo) {
+            result = sadDAO.queryOne(pidm, termCodeEntry, applNo, seqNo)
+            if (!result)
+                throw new WebApplicationException(Response.Status.NOT_FOUND)
+        } else if (termCodeEntry || applNo || seqNo) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST)
-        else
-            return sadDAO.queryAll(pidm)
+        } else {
+            result = sadDAO.queryAll(pidm)
+            if (result.isEmpty())
+                throw new WebApplicationException(Response.Status.NOT_FOUND)
+        }
+        return result
     }
 }

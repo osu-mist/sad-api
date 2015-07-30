@@ -7,8 +7,6 @@ import io.dropwizard.lifecycle.Managed
 import io.dropwizard.setup.Environment
 import org.skife.jdbi.v2.DBI
 import org.skife.jdbi.v2.Handle
-import javax.ws.rs.core.Response
-import javax.ws.rs.WebApplicationException
 import java.sql.Connection
 import java.sql.CallableStatement
 import java.sql.ResultSet
@@ -44,8 +42,6 @@ class SadDAO implements Managed {
         List<Sad> list = new ArrayList<Sad>()
         while (result.next())
             list.add(map(result))
-        if (list.isEmpty())
-            throw new WebApplicationException(Response.Status.NOT_FOUND)
         return list
     }
 
@@ -62,7 +58,7 @@ class SadDAO implements Managed {
         statement.execute()
         ResultSet result = (ResultSet)statement.getObject(1)
         if (!result.next())
-            throw new WebApplicationException(Response.Status.NOT_FOUND)
+            return null
         return map(result)
     }
 
