@@ -24,10 +24,26 @@ paths:
     delete:
   /{pidm}:
     get:
-      summary: Get all
-      description: Get all student application decisions for a given pidm
+      summary: Read student application decisions
+      parameters:
+        - name: termCodeEntry
+          in: query
+          description: Term code entry
+          required: false
+        - name: applNo
+          in: query
+          description: Application number
+          required: false
+        - name: seqNo
+          in: query
+          description: Sequence number
+          required: false
       responses:
         200:
           description: ok
           schema:
             type: application/json
+        400:
+          description: bad request
+        404:
+          description: not found

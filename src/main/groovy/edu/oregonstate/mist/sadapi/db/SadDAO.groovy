@@ -49,6 +49,23 @@ class SadDAO implements Managed {
         return list
     }
 
+    public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
+        String query = '''BEGIN
+                            ? := SB_APPLICATION_DECISION.f_query_one(?,?,?,?);
+                          END;'''
+        CallableStatement statement = connection.prepareCall(query)
+        statement.registerOutParameter(1, OracleTypes.CURSOR)
+        statement.setLong(2, pidm)
+        statement.setString(3, termCodeEntry)
+        statement.setLong(4, applNo)
+        statement.setLong(5, seqNo)
+        statement.execute()
+        ResultSet result = (ResultSet)statement.getObject(1)
+        if (!result.next())
+            throw new WebApplicationException(Response.Status.NOT_FOUND)
+        return map(result)
+    }
+
     private static Sad map(ResultSet rs) {
         return new Sad(
                 pidm:          rs.getLong('sarappd_pidm'),
