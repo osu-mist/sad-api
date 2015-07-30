@@ -19,12 +19,6 @@ class SadResource {
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String respond() {
-        return "goodbye world"
-    }
-
-    @GET
     @Path('{pidm: \\d+}')
     @Produces(MediaType.APPLICATION_JSON)
     public Object read(@PathParam('pidm') Long pidm,

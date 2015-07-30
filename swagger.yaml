@@ -10,18 +10,6 @@ host: localhost
 schemes:
   - http
 paths:
-  /:
-    get:
-      summary: Sample Resource
-      description: This is a sample resource that returns a short message.
-      responses:
-        200:
-          description: A short message
-          schema:
-            type: string
-    post:
-    put:
-    delete:
   /{pidm}:
     get:
       summary: Read student application decisions

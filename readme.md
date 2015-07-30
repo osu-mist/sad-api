@@ -44,13 +44,6 @@ or
 
 The Web API definition is contained in the [Swagger specification](swagger.yaml).
 
-### GET /
-
-This sample resource returns a short message:
-
-    $ curl --ipv4 localhost:8888
-    goodbye world
-
 ### GET /{pidm}
 
 Return one student application decision for a given pidm, term code, application number, and sequence number:
