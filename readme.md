@@ -37,7 +37,7 @@ Run the project:
 
 or
 
-    $ java -classpath build/libs/sad-api-all.jar edu.oregonstate.mist.sadapi.SadApplication server configuration.yaml
+    $ java -jar build/libs/sad-api-all.jar server configuration.yaml
 
 
 ## Resources
