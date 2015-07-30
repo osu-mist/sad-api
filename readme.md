@@ -59,7 +59,7 @@ Return one student application decision for a given pidm, term code, application
     
     {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"}
 
-### GET/{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={seqNo}
+### GET /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={seqNo}
 
 Return all student application decisions for a given pidm:
 
