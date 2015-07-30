@@ -69,21 +69,6 @@ Examples of valid values:
     
      10 rows selected 
 
-### GET /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={seqNo}
-
-Return one student application decision for a given pidm, term code, application number, and sequence number:
-
-    $ nc localhost 8888 << HERE
-    > GET /api/v0/1320366?termCodeEntry=201600&applNo=1&seqNo=1 HTTP/1.0
-    > 
-    > HERE
-    HTTP/1.1 200 OK
-    Date: Thu, 30 Jul 2015 00:56:01 GMT
-    Content-Type: application/json
-    Content-Length: 156
-    
-    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"}
-
 ### GET /{pidm}
 
 Return all student application decisions for a given pidm:
@@ -99,6 +84,21 @@ Return all student application decisions for a given pidm:
     Content-Length: 953
     
     [{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":3,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":4,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":5,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":6,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":7,"apdcDate":"2015-07-27","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"}]
+
+### GET /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={seqNo}
+
+Return one student application decision for a given pidm, term code, application number, and sequence number:
+
+    $ nc localhost 8888 << HERE
+    > GET /api/v0/1320366?termCodeEntry=201600&applNo=1&seqNo=1 HTTP/1.0
+    > 
+    > HERE
+    HTTP/1.1 200 OK
+    Date: Thu, 30 Jul 2015 00:56:01 GMT
+    Content-Type: application/json
+    Content-Length: 156
+    
+    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"}
 
 ### POST
 
