@@ -66,17 +66,17 @@ class SadDAO implements Managed {
         return map(result)
     }
 
-    private static Sad map(ResultSet rs) {
+    private static Sad map(ResultSet result) {
         return new Sad(
-                pidm:          rs.getLong('sarappd_pidm'),
-                termCodeEntry: rs.getString('sarappd_term_code_entry'),
-                applNo:        rs.getLong('sarappd_appl_no'),
-                seqNo:         rs.getLong('sarappd_seq_no'),
-                apdcDate:      rs.getDate('sarappd_apdc_date'),
-                apdcCode:      rs.getString('sarappd_apdc_code'),
-                maintInd:      rs.getString('sarappd_maint_ind'),
-                user:          rs.getString('sarappd_user'),
-                dataOrigin:    rs.getString('sarappd_data_origin')
+                pidm:          result.getLong('sarappd_pidm'),
+                termCodeEntry: result.getString('sarappd_term_code_entry'),
+                applNo:        result.getLong('sarappd_appl_no'),
+                seqNo:         result.getLong('sarappd_seq_no'),
+                apdcDate:      result.getDate('sarappd_apdc_date'),
+                apdcCode:      result.getString('sarappd_apdc_code'),
+                maintInd:      result.getString('sarappd_maint_ind'),
+                user:          result.getString('sarappd_user'),
+                dataOrigin:    result.getString('sarappd_data_origin')
         )
     }
 }
