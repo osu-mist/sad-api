@@ -23,6 +23,7 @@ class SadDAO implements Managed {
         this.environment = environment
     }
 
+    @Override
     public void start() {
         DBIFactory factory = new DBIFactory()
         DBI jdbi = factory.build(environment, configuration.getDatabase(), 'oracle')
@@ -30,6 +31,7 @@ class SadDAO implements Managed {
         connection = handle.getConnection()
     }
 
+    @Override
     public void stop() {
         handle.close()
     }
