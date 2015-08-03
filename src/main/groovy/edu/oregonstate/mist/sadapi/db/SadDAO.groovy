@@ -44,9 +44,9 @@ class SadDAO implements Managed {
         statement.execute()
         ResultSet result = (ResultSet)statement.getObject(1)
         List<Sad> list = new ArrayList<Sad>()
-        while (result.next())
-            list.add(map(result))
-        return list
+        while (result.next()) {
+            list.add(map(result)) }
+        list
     }
 
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
@@ -61,13 +61,13 @@ class SadDAO implements Managed {
         statement.setLong(5, seqNo)
         statement.execute()
         ResultSet result = (ResultSet)statement.getObject(1)
-        if (!result.next())
-            return null
-        return map(result)
+        if (!result.next()) {
+            return null }
+        map(result)
     }
 
     private static Sad map(ResultSet result) {
-        return new Sad(
+        new Sad(
                 pidm:          result.getLong('sarappd_pidm'),
                 termCodeEntry: result.getString('sarappd_term_code_entry'),
                 applNo:        result.getLong('sarappd_appl_no'),

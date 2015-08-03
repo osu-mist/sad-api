@@ -28,15 +28,15 @@ class SadResource {
         Object result
         if (termCodeEntry && applNo && seqNo) {
             result = sadDAO.queryOne(pidm, termCodeEntry, applNo, seqNo)
-            if (!result)
-                throw new WebApplicationException(Response.Status.NOT_FOUND)
+            if (!result) {
+                throw new WebApplicationException(Response.Status.NOT_FOUND) }
         } else if (termCodeEntry || applNo || seqNo) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST)
         } else {
             result = sadDAO.queryAll(pidm)
-            if (result.isEmpty())
-                throw new WebApplicationException(Response.Status.NOT_FOUND)
+            if (result.isEmpty()) {
+                throw new WebApplicationException(Response.Status.NOT_FOUND) }
         }
-        return result
+        result
     }
 }
