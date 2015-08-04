@@ -47,7 +47,9 @@ class SadDAO implements Managed {
         ResultSet result = (ResultSet)statement.getObject(1)
         List<Sad> list = new ArrayList<Sad>()
         while (result.next()) {
-            list.add(map(result)) }
+            list.add(map(result))
+            result.close()
+        }
         list
     }
 
@@ -63,9 +65,12 @@ class SadDAO implements Managed {
         statement.setLong(5, seqNo)
         statement.execute()
         ResultSet result = (ResultSet)statement.getObject(1)
-        if (!result.next()) {
-            return null }
-        map(result)
+        Sad sad = null
+        if (result.next()) {
+            sad = map(result)
+            result.close()
+        }
+        sad
     }
 
     private static Sad map(ResultSet result) {
