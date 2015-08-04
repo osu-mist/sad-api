@@ -48,8 +48,8 @@ class SadDAO implements Managed {
         List<Sad> sadList = new ArrayList<Sad>()
         while (result.next()) {
             sadList.add(map(result))
-            result.close()
         }
+        result.close()
         sadList
     }
 
