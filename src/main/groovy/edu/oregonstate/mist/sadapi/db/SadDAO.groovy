@@ -37,38 +37,52 @@ class SadDAO implements Managed {
     }
 
     public List<Sad> queryAll(Long pidm) {
+        List<Sad> sadList = new ArrayList<Sad>()
         String query = '''BEGIN
                             ? := SB_APPLICATION_DECISION.f_query_all(?);
                           END;'''
         CallableStatement statement = connection.prepareCall(query)
-        statement.registerOutParameter(1, OracleTypes.CURSOR)
-        statement.setLong(2, pidm)
-        statement.execute()
-        ResultSet result = (ResultSet)statement.getObject(1)
-        List<Sad> sadList = new ArrayList<Sad>()
-        while (result.next()) {
-            sadList.add(map(result))
+        try {
+            statement.registerOutParameter(1, OracleTypes.CURSOR)
+            statement.setLong(2, pidm)
+            statement.execute()
+            ResultSet result = (ResultSet) statement.getObject(1)
+            try {
+                while (result.next()) {
+                    sadList.add(map(result))
+                }
+            } finally {
+                result.close()
+            }
+        } finally {
+            statement.close()
         }
-        result.close()
         sadList
     }
 
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
+        Sad sad = null
         String query = '''BEGIN
                             ? := SB_APPLICATION_DECISION.f_query_one(?,?,?,?);
                           END;'''
         CallableStatement statement = connection.prepareCall(query)
-        statement.registerOutParameter(1, OracleTypes.CURSOR)
-        statement.setLong(2, pidm)
-        statement.setString(3, termCodeEntry)
-        statement.setLong(4, applNo)
-        statement.setLong(5, seqNo)
-        statement.execute()
-        ResultSet result = (ResultSet)statement.getObject(1)
-        Sad sad = null
-        if (result.next()) {
-            sad = map(result)
-            result.close()
+        try {
+            statement.registerOutParameter(1, OracleTypes.CURSOR)
+            statement.setLong(2, pidm)
+            statement.setString(3, termCodeEntry)
+            statement.setLong(4, applNo)
+            statement.setLong(5, seqNo)
+            statement.execute()
+            ResultSet result = (ResultSet) statement.getObject(1)
+            try {
+                if (result.next()) {
+                    sad = map(result)
+                }
+            } finally {
+                result.close()
+            }
+        } finally {
+            statement.close()
         }
         sad
     }
