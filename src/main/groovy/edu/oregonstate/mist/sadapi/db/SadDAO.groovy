@@ -45,12 +45,12 @@ class SadDAO implements Managed {
         statement.setLong(2, pidm)
         statement.execute()
         ResultSet result = (ResultSet)statement.getObject(1)
-        List<Sad> list = new ArrayList<Sad>()
+        List<Sad> sadList = new ArrayList<Sad>()
         while (result.next()) {
-            list.add(map(result))
+            sadList.add(map(result))
             result.close()
         }
-        list
+        sadList
     }
 
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
