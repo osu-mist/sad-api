@@ -44,31 +44,6 @@ or
 
 The Web API definition is contained in the [Swagger specification](swagger.yaml).
 
-The table `SARAPPD` has a composite primary key constraint on the columns `SARAPPD_PIDM`, `SARAPPD_TERM_CODE_ENTRY`, `SARAPPD_APPL_NO`, and `SARAPPD_SEQ_NO`. Valid values may be obtained with an SQL query like this:
-
-    SELECT SARAPPD_PIDM, SARAPPD_TERM_CODE_ENTRY, SARAPPD_APPL_NO, SARAPPD_SEQ_NO
-    FROM SARAPPD
-    WHERE SARAPPD_TERM_CODE_ENTRY LIKE '2016__'
-    AND ROWNUM <= 10
-    ORDER BY SARAPPD_TERM_CODE_ENTRY;
-
-Examples of valid values:
-
-    SARAPPD_PIDM SARAPPD_TERM_CODE_ENTRY SARAPPD_APPL_NO SARAPPD_SEQ_NO
-    ------------ ----------------------- --------------- --------------
-         1311112 201601                                2              1 
-         1320251 201601                                1              1 
-         1320254 201601                                1              1 
-         1320255 201601                                1              1 
-         1320263 201601                                1              1 
-         1320256 201601                                1              1 
-         1320257 201601                                1              1 
-         1320261 201601                                1              1 
-         1320255 201601                                1              2 
-         1320262 201602                                1              1 
-    
-     10 rows selected 
-
 ### GET /{pidm}
 
 Return all student application decisions for a given pidm:
