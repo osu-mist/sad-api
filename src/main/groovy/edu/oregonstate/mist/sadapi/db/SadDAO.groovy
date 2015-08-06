@@ -12,7 +12,7 @@ import java.sql.CallableStatement
 import java.sql.ResultSet
 import oracle.jdbc.OracleTypes
 
-class SadDAO implements Managed {
+class SadDAO extends AbstractSadDAO implements Managed {
     private SadApplicationConfiguration configuration
     private Environment environment
     private Handle handle
@@ -38,10 +38,7 @@ class SadDAO implements Managed {
 
     public List<Sad> queryAll(Long pidm) {
         List<Sad> sadList = new ArrayList<Sad>()
-        String query = '''BEGIN
-                            ? := SB_APPLICATION_DECISION.f_query_all(?);
-                          END;'''
-        CallableStatement statement = connection.prepareCall(query)
+        CallableStatement statement = connection.prepareCall(QUERY_ALL)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -62,10 +59,7 @@ class SadDAO implements Managed {
 
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
         Sad sad = null
-        String query = '''BEGIN
-                            ? := SB_APPLICATION_DECISION.f_query_one(?,?,?,?);
-                          END;'''
-        CallableStatement statement = connection.prepareCall(query)
+        CallableStatement statement = connection.prepareCall(QUERY_ONE)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -89,15 +83,15 @@ class SadDAO implements Managed {
 
     private static Sad map(ResultSet result) {
         new Sad(
-                pidm:          result.getLong('sarappd_pidm'),
-                termCodeEntry: result.getString('sarappd_term_code_entry'),
-                applNo:        result.getLong('sarappd_appl_no'),
-                seqNo:         result.getLong('sarappd_seq_no'),
-                apdcDate:      result.getDate('sarappd_apdc_date'),
-                apdcCode:      result.getString('sarappd_apdc_code'),
-                maintInd:      result.getString('sarappd_maint_ind'),
-                user:          result.getString('sarappd_user'),
-                dataOrigin:    result.getString('sarappd_data_origin')
+                pidm:          result.getLong(PIDM),
+                termCodeEntry: result.getString(TERMCODEENTRY),
+                applNo:        result.getLong(APPLNO),
+                seqNo:         result.getLong(SEQNO),
+                apdcDate:      result.getDate(APDCDATE),
+                apdcCode:      result.getString(APDCCODE),
+                maintInd:      result.getString(MAINTIND),
+                user:          result.getString(USER),
+                dataOrigin:    result.getString(DATAORIGIN)
         )
     }
 }
