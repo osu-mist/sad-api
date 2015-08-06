@@ -17,9 +17,25 @@ Generate IntelliJ IDEA project:
 
 Open with `File` -> `Open Project`.
 
-### Oracle Driver
+### Dependencies
+
+#### Oracle Driver
 
 Download `ojdbc6_g.jar` from [Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) and save in `bin/` directory.
+
+#### Private Files
+
+Add private repository `sad-api-contrib` as a remote:
+
+    $ git remote add contrib /path/to/sad-api-contrib.git
+    $ git fetch contrib
+
+Overlay files:
+
+    $ git checkout feature/abc-123-xyz
+    $ git merge --no-commit contrib/feature/abc-123-xyz
+
+See [readme-contrib.md](readme-contrib.md) for more details.
 
 ### Build
 
@@ -39,6 +55,15 @@ or
 
     $ java -jar build/libs/sad-api-all.jar server configuration.yaml
 
+### Clean
+
+Remove private files:
+
+    $ git merge --abort
+
+Remove generated files:
+
+    $ gradle clean
 
 ## Resources
 
