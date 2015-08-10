@@ -8,6 +8,4 @@ class Sad {
     Date apdcDate
     String apdcCode
     String maintInd
-    String user
-    String dataOrigin
 }

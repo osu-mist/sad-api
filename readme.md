@@ -78,12 +78,12 @@ Return all student application decisions for a given pidm:
     > 
     > HERE
     HTTP/1.1 200 OK
-    Date: Thu, 30 Jul 2015 00:53:24 GMT
+    Date: Mon, 10 Aug 2015 22:29:45 GMT
     Content-Type: application/json
     Vary: Accept-Encoding
-    Content-Length: 953
+    Content-Length: 709
     
-    [{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":3,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":4,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":5,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":6,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":7,"apdcDate":"2015-07-27","apdcCode":"AA","maintInd":"U","user":"SAISAPIS","dataOrigin":"WEB_API"}]
+    [{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":3,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":4,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":5,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":6,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":7,"apdcDate":"2015-07-27","apdcCode":"AA","maintInd":"U"}]
 
 ### GET /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={sn}
 
@@ -94,11 +94,11 @@ Return one student application decision for a given pidm, term code, application
     > 
     > HERE
     HTTP/1.1 200 OK
-    Date: Thu, 30 Jul 2015 00:56:01 GMT
+    Date: Mon, 10 Aug 2015 22:31:23 GMT
     Content-Type: application/json
-    Content-Length: 156
+    Content-Length: 117
     
-    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S","user":"SAISPRD","dataOrigin":"Banner"}
+    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S"}
 
 ### POST
 

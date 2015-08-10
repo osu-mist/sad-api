@@ -89,9 +89,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
                 seqNo:         result.getLong(SEQNO),
                 apdcDate:      result.getDate(APDCDATE),
                 apdcCode:      result.getString(APDCCODE),
-                maintInd:      result.getString(MAINTIND),
-                user:          result.getString(USER),
-                dataOrigin:    result.getString(DATAORIGIN)
+                maintInd:      result.getString(MAINTIND)
         )
     }
 }
