@@ -1,6 +1,6 @@
-# Web API Skeleton
+# Student Application Decision Web API
 
-Skeleton for Dropwizard Web APIs.
+Web API for creating, reading, updating, and deleting student application decision codes.
 
 
 ## Tasks
@@ -17,6 +17,26 @@ Generate IntelliJ IDEA project:
 
 Open with `File` -> `Open Project`.
 
+### Dependencies
+
+#### Oracle Driver
+
+Download `ojdbc6_g.jar` from [Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) and save in `bin/` directory.
+
+#### Private Files
+
+Add private repository `sad-api-contrib` as a remote:
+
+    $ git remote add contrib /path/to/sad-api-contrib.git
+    $ git fetch contrib
+
+Overlay files:
+
+    $ git checkout feature/abc-123-xyz
+    $ git merge --no-commit contrib/feature/abc-123-xyz
+
+See [readme-contrib.md](readme-contrib.md) for more details.
+
 ### Build
 
 Build the project:
@@ -31,40 +51,57 @@ Run the project:
 
     $ gradle run
 
+or
 
-## Base an Existing Project off the Skeleton
+    $ java -jar build/libs/sad-api-all.jar server configuration.yaml
 
-1. Add the skeleton as a remote:
+### Clean
 
-        $ git remote add skeleton https://github.com/osu-mist/web-api-skeleton.git
+Remove private files:
 
-2. Create a branch to track the skeleton:
+    $ git merge --abort
 
-        $ git checkout -b skeleton-master skeleton/master
+Remove generated files:
 
-3. Merge the skeleton into your codebase:
-
-        $ git checkout feature/abc-123-branch
-        $ git merge skeleton-master
-        ...
-        $ git commit -v
-
+    $ gradle clean
 
 ## Resources
 
 The Web API definition is contained in the [Swagger specification](swagger.yaml).
 
-### GET /
+### GET /{pidm}
 
-This sample resource returns a short message:
+Return all student application decisions for a given pidm:
 
-    $ nc localhost 8008 << HERE
-    > GET / HTTP/1.0
+    $ nc localhost 8888 << HERE
+    > GET /api/v0/1320366 HTTP/1.0
     > 
     > HERE
     HTTP/1.1 200 OK
-    Date: Mon, 20 Jul 2015 21:51:49 GMT
-    Content-Type: text/plain
-    Content-Length: 11
+    Date: Mon, 10 Aug 2015 22:29:45 GMT
+    Content-Type: application/json
+    Vary: Accept-Encoding
+    Content-Length: 709
     
-    hello world
+    [{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":3,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":4,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":5,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":6,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"},{"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":7,"apdcDate":"2015-07-27","apdcCode":"AA","maintInd":"U"}]
+
+### GET /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={sn}
+
+Return one student application decision for a given pidm, term code, application number, and sequence number:
+
+    $ nc localhost 8888 << HERE
+    > GET /api/v0/1320366?termCodeEntry=201600&applNo=1&seqNo=1 HTTP/1.0
+    > 
+    > HERE
+    HTTP/1.1 200 OK
+    Date: Mon, 10 Aug 2015 22:31:23 GMT
+    Content-Type: application/json
+    Content-Length: 117
+    
+    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S"}
+
+### POST
+
+### PUT
+
+### DELETE
