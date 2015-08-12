@@ -104,4 +104,21 @@ Return one student application decision for a given pidm, term code, application
 
 ### PUT
 
+Update student application decision:
+
+    $ nc localhost 8888 << HERE
+    > PUT /api/v0/1320366 HTTP/1.0
+    > Content-Type: application/json
+    > Content-Length: 117
+    > 
+    > {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2015-08-13","apdcCode":"AT","maintInd":"S"}
+    > 
+    > HERE
+    HTTP/1.1 200 OK
+    Date: Wed, 12 Aug 2015 22:34:26 GMT
+    Content-Type: application/json
+    Content-Length: 117
+    
+    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2015-08-13","apdcCode":"AT","maintInd":"S"}
+
 ### DELETE

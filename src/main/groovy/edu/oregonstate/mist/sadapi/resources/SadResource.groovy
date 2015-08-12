@@ -1,7 +1,11 @@
 package edu.oregonstate.mist.sadapi.resources
 
+import edu.oregonstate.mist.sadapi.core.Sad
 import edu.oregonstate.mist.sadapi.db.SadDAO
+import javax.validation.Valid
+import javax.ws.rs.Consumes
 import javax.ws.rs.GET
+import javax.ws.rs.PUT
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
@@ -36,6 +40,24 @@ class SadResource {
             result = sadDAO.queryAll(pidm)
             if (result.isEmpty()) {
                 throw new WebApplicationException(Response.Status.NOT_FOUND) }
+        }
+        result
+    }
+
+    @PUT
+    @Path('{pidm: \\d+}')
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object read(@PathParam('pidm') Long pidm, @Valid Sad sad) {
+        Object result = sadDAO.update(pidm,
+                                      sad.termCodeEntry,
+                                      sad.applNo,
+                                      sad.seqNo,
+                                      sad.apdcDate,
+                                      sad.apdcCode,
+                                      sad.maintInd)
+        if (!result) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND)
         }
         result
     }
