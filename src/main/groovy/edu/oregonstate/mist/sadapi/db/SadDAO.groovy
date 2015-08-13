@@ -110,6 +110,32 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sad
     }
 
+    public Sad create(Long pidm, String termCodeEntry, Long applNo, Date apdcDate, String apdcCode, String maintInd) {
+        Sad sad = null
+        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(CREATE)
+        try {
+            statement.setLong(1, pidm)
+            statement.setString(2, termCodeEntry)
+            statement.setLong(3, applNo)
+            statement.setDATE(4, toDATE(apdcDate))
+            statement.setString(5, apdcCode)
+            statement.setString(6, maintInd)
+            statement.registerOutParameter(7, OracleTypes.CURSOR)
+            statement.execute()
+            ResultSet result = (ResultSet)statement.getObject(7)
+            try {
+                if (result.next()) {
+                    sad = map(result)
+                }
+            } finally {
+                result.close()
+            }
+        } finally {
+            statement.close()
+        }
+        sad
+    }
+
     private static Sad map(ResultSet result) {
         new Sad(
                 pidm:          result.getLong(PIDM),

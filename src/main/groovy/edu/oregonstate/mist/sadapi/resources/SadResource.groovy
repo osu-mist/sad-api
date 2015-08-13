@@ -5,6 +5,7 @@ import edu.oregonstate.mist.sadapi.db.SadDAO
 import javax.validation.Valid
 import javax.ws.rs.Consumes
 import javax.ws.rs.GET
+import javax.ws.rs.POST
 import javax.ws.rs.PUT
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
@@ -53,6 +54,22 @@ class SadResource {
                                       sad.termCodeEntry,
                                       sad.applNo,
                                       sad.seqNo,
+                                      sad.apdcDate,
+                                      sad.apdcCode,
+                                      sad.maintInd)
+        if (!result) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND)
+        }
+        result
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object create(@Valid Sad sad) {
+        Object result = sadDAO.create(sad.pidm,
+                                      sad.termCodeEntry,
+                                      sad.applNo,
                                       sad.apdcDate,
                                       sad.apdcCode,
                                       sad.maintInd)

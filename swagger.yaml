@@ -43,3 +43,10 @@ paths:
           description: ok
           schema:
             type: application/json
+    post:
+      summary: Create student application decisions
+      responses:
+        200:
+          description: ok
+          schema:
+            type: application/json
