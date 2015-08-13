@@ -139,3 +139,16 @@ Update student application decision:
     {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2015-08-13","apdcCode":"AT","maintInd":"S"}
 
 ### DELETE
+
+Delete student application decision:
+
+    $ nc localhost 8888 << HERE
+    > DELETE /api/v0/1320366?termCodeEntry=201600&applNo=1&seqNo=5 HTTP/1.0
+    > 
+    > HERE
+    HTTP/1.1 200 OK
+    Date: Thu, 13 Aug 2015 21:44:08 GMT
+    Content-Type: application/json
+    Content-Length: 117
+    
+    {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":5,"apdcDate":"2015-07-23","apdcCode":"AA","maintInd":"U"}
