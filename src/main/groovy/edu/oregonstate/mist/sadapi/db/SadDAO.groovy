@@ -45,7 +45,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
             statement.execute()
-            ResultSet result = (ResultSet) statement.getObject(1)
+            ResultSet result = (ResultSet)statement.getObject(1)
             try {
                 while (result.next()) {
                     sadList.add(map(result))
@@ -69,7 +69,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.setLong(4, applNo)
             statement.setLong(5, seqNo)
             statement.execute()
-            ResultSet result = (ResultSet) statement.getObject(1)
+            ResultSet result = (ResultSet)statement.getObject(1)
             try {
                 if (result.next()) {
                     sad = map(result)
@@ -96,7 +96,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.setString(7, maintInd)
             statement.registerOutParameter(8, OracleTypes.CURSOR)
             statement.execute()
-            ResultSet result = (ResultSet) statement.getObject(8)
+            ResultSet result = (ResultSet)statement.getObject(8)
             try {
                 if (result.next()) {
                     sad = map(result)
