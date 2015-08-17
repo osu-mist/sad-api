@@ -50,7 +50,7 @@ class SadResource {
     @Path('{pidm: \\d+}')
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object read(@PathParam('pidm') Long pidm, @Valid Sad sad) {
+    public Object update(@PathParam('pidm') Long pidm, @Valid Sad sad) {
         Object result = sadDAO.update(pidm,
                                       sad.termCodeEntry,
                                       sad.applNo,
