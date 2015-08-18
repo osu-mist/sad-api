@@ -4,6 +4,7 @@ import edu.oregonstate.mist.sadapi.core.Sad
 import edu.oregonstate.mist.sadapi.db.SadDAO
 import javax.validation.Valid
 import javax.ws.rs.Consumes
+import javax.ws.rs.DELETE
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.PUT
@@ -73,6 +74,20 @@ class SadResource {
                                       sad.apdcDate,
                                       sad.apdcCode,
                                       sad.maintInd)
+        if (!result) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND)
+        }
+        result
+    }
+
+    @DELETE
+    @Path('{pidm: \\d+}')
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object delete(@PathParam('pidm') Long pidm,
+                         @QueryParam('termCodeEntry') String termCodeEntry,
+                         @QueryParam('applNo') Long applNo,
+                         @QueryParam('seqNo') Long seqNo) {
+        Object result = sadDAO.delete(pidm, termCodeEntry, applNo, seqNo)
         if (!result) {
             throw new WebApplicationException(Response.Status.NOT_FOUND)
         }

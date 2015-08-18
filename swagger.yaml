@@ -50,3 +50,10 @@ paths:
           description: ok
           schema:
             type: application/json
+    delete:
+      summary: Delete student application decisions
+      responses:
+        200:
+          description: ok
+          schema:
+            type: application/json
