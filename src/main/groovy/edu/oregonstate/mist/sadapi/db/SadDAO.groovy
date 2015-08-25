@@ -98,14 +98,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(8)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
@@ -124,11 +124,11 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(7)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
             statement.close()
