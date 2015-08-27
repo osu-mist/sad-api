@@ -1,5 +1,8 @@
 package edu.oregonstate.mist.sadapi.core
 
+/**
+ * Student application decision representation class.
+ */
 class Sad {
     Long pidm
     String termCodeEntry
