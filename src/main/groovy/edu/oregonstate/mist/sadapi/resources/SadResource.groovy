@@ -36,20 +36,12 @@ class SadResource {
         ResponseBuilder responseBuilder
         if (termCodeEntry && applNo && seqNo) {
             Sad result = sadDAO.queryOne(pidm, termCodeEntry, applNo, seqNo)
-            if (result) {
-                responseBuilder = ok(result)
-            } else {
-                responseBuilder = notFound()
-            }
+            responseBuilder = (result) ? ok(result) : notFound()
         } else if (termCodeEntry || applNo || seqNo) {
             responseBuilder = badRequest('termCodeEntry, applNo, and seqNo query parameters are required')
         } else {
             List<Sad> result = sadDAO.queryAll(pidm)
-            if (result) {
-                responseBuilder = ok(result)
-            } else {
-                responseBuilder = notFound()
-            }
+            responseBuilder = (result) ? ok(result) : notFound()
         }
         responseBuilder.build()
     }
@@ -62,11 +54,7 @@ class SadResource {
         ResponseBuilder responseBuilder
         try {
             Sad result = sadDAO.update(pidm, sad.termCodeEntry, sad.applNo, sad.seqNo, sad.apdcDate, sad.apdcCode, sad.maintInd)
-            if (result) {
-                responseBuilder = ok(result)
-            } else {
-                responseBuilder = notFound()
-            }
+            responseBuilder = (result) ? ok(result) : notFound()
         } catch (SQLException|IllegalArgumentException exception) {
             responseBuilder = badRequest(exception.message)
         }
@@ -80,11 +68,7 @@ class SadResource {
         ResponseBuilder responseBuilder
         try {
             Sad result = sadDAO.create(sad.pidm, sad.termCodeEntry, sad.applNo, sad.apdcDate, sad.apdcCode, sad.maintInd)
-            if (result) {
-                responseBuilder = created(result)
-            } else {
-                responseBuilder = badRequest('Bad Request')
-            }
+            responseBuilder = (result) ? created(result) : badRequest('Bad Request')
         } catch (SQLException|IllegalArgumentException exception) {
             responseBuilder = badRequest(exception.message)
         }
@@ -101,11 +85,7 @@ class SadResource {
         ResponseBuilder responseBuilder
         try {
             Sad result = sadDAO.delete(pidm, termCodeEntry, applNo, seqNo)
-            if (result) {
-                responseBuilder = ok(result)
-            } else {
-                responseBuilder = notFound()
-            }
+            responseBuilder = (result) ? ok(result) : notFound()
         } catch (SQLException sqlException) {
             responseBuilder = badRequest(sqlException.message)
         }
