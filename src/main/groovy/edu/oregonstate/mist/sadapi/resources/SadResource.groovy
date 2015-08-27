@@ -37,8 +37,7 @@ class SadResource {
         if (termCodeEntry && applNo && seqNo) {
             Sad result = sadDAO.queryOne(pidm, termCodeEntry, applNo, seqNo)
             if (result) {
-                responseBuilder = Response.ok()
-                responseBuilder.entity(result)
+                responseBuilder = ok(result)
             } else {
                 responseBuilder = notFound()
             }
@@ -47,8 +46,7 @@ class SadResource {
         } else {
             List<Sad> result = sadDAO.queryAll(pidm)
             if (result) {
-                responseBuilder = Response.ok()
-                responseBuilder.entity(result)
+                responseBuilder = ok(result)
             } else {
                 responseBuilder = notFound()
             }
@@ -65,8 +63,7 @@ class SadResource {
         try {
             Sad result = sadDAO.update(pidm, sad.termCodeEntry, sad.applNo, sad.seqNo, sad.apdcDate, sad.apdcCode, sad.maintInd)
             if (result) {
-                responseBuilder = Response.ok()
-                responseBuilder.entity(result)
+                responseBuilder = ok(result)
             } else {
                 responseBuilder = notFound()
             }
@@ -84,8 +81,7 @@ class SadResource {
         try {
             Sad result = sadDAO.create(sad.pidm, sad.termCodeEntry, sad.applNo, sad.apdcDate, sad.apdcCode, sad.maintInd)
             if (result) {
-                responseBuilder = Response.status(Response.Status.CREATED)
-                responseBuilder.entity(result)
+                responseBuilder = created(result)
             } else {
                 responseBuilder = badRequest('Bad Request')
             }
@@ -106,8 +102,7 @@ class SadResource {
         try {
             Sad result = sadDAO.delete(pidm, termCodeEntry, applNo, seqNo)
             if (result) {
-                responseBuilder = Response.ok()
-                responseBuilder.entity(result)
+                responseBuilder = ok(result)
             } else {
                 responseBuilder = notFound()
             }
@@ -115,6 +110,16 @@ class SadResource {
             responseBuilder = badRequest(sqlException.message)
         }
         responseBuilder.build()
+    }
+
+    private static ResponseBuilder ok(Object entity) {
+        ResponseBuilder responseBuilder = Response.ok()
+        responseBuilder.entity(entity)
+    }
+
+    private static ResponseBuilder created(Object entity) {
+        ResponseBuilder responseBuilder = Response.status(Response.Status.CREATED)
+        responseBuilder.entity(entity)
     }
 
     private static ResponseBuilder notFound() {
