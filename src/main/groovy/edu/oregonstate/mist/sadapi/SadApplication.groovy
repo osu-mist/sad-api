@@ -9,7 +9,7 @@ import io.dropwizard.setup.Environment
 /**
  * Main application class.
  */
-class SadApplication extends Application<SadApplicationConfiguration>{
+class SadApplication extends Application<SadApplicationConfiguration> {
     /**
      * Initializes the application bootstrap.
      *
