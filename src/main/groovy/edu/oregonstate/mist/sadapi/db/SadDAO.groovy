@@ -62,7 +62,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
      */
     public List<Sad> queryAll(Long pidm) {
         List<Sad> sadList = new ArrayList<Sad>()
-        CallableStatement statement = connection.prepareCall(QUERY_ALL)
+        CallableStatement statement = connection.prepareCall(super.QUERY_ALL)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -92,7 +92,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
      */
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
         Sad sad = null
-        CallableStatement statement = connection.prepareCall(QUERY_ONE)
+        CallableStatement statement = connection.prepareCall(super.QUERY_ONE)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -131,7 +131,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
     public Sad update(Long pidm, String termCodeEntry, Long applNo, Long seqNo, Date apdcDate, String apdcCode, String maintInd)
             throws SQLException, IllegalArgumentException {
         Sad sad = null
-        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(UPDATE)
+        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(super.UPDATE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -172,7 +172,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
     public Sad create(Long pidm, String termCodeEntry, Long applNo, Date apdcDate, String apdcCode, String maintInd)
             throws SQLException, IllegalArgumentException {
         Sad sad = null
-        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(CREATE)
+        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(super.CREATE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -209,7 +209,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
     public Sad delete(Long pidm, String termCodeEntry, Long applNo, Long seqNo)
             throws SQLException {
         Sad sad = null
-        CallableStatement statement = connection.prepareCall(DELETE)
+        CallableStatement statement = connection.prepareCall(super.DELETE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -239,13 +239,13 @@ class SadDAO extends AbstractSadDAO implements Managed {
      */
     private static Sad map(ResultSet result) {
         new Sad(
-                pidm:          result.getLong(PIDM),
-                termCodeEntry: result.getString(TERMCODEENTRY),
-                applNo:        result.getLong(APPLNO),
-                seqNo:         result.getLong(SEQNO),
-                apdcDate:      result.getDate(APDCDATE),
-                apdcCode:      result.getString(APDCCODE),
-                maintInd:      result.getString(MAINTIND)
+                pidm:          result.getLong(super.PIDM),
+                termCodeEntry: result.getString(super.TERMCODEENTRY),
+                applNo:        result.getLong(super.APPLNO),
+                seqNo:         result.getLong(super.SEQNO),
+                apdcDate:      result.getDate(super.APDCDATE),
+                apdcCode:      result.getString(super.APDCCODE),
+                maintInd:      result.getString(super.MAINTIND)
         )
     }
 
