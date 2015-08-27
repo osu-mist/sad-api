@@ -256,6 +256,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
      * @return Oracle DATE
      */
     private static DATE toDATE(Date date) {
-        new DATE(new java.sql.Date(date.getTime() + 1000*60*60*8))
+        long PacificStandardTimeMillisecondOffset = 1000*60*60*8
+        new DATE(new java.sql.Date(date.getTime() + PacificStandardTimeMillisecondOffset))
     }
 }
