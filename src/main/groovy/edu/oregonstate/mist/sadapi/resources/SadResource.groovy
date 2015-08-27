@@ -99,9 +99,9 @@ class SadResource {
     @Path('{pidm: \\d+}')
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam('pidm') Long pidm,
-                  @QueryParam('termCodeEntry') String termCodeEntry,
-                  @QueryParam('applNo') Long applNo,
-                  @QueryParam('seqNo') Long seqNo) {
+                           @QueryParam('termCodeEntry') String termCodeEntry,
+                           @QueryParam('applNo') Long applNo,
+                           @QueryParam('seqNo') Long seqNo) {
         ResponseBuilder responseBuilder
         try {
             Sad result = sadDAO.delete(pidm, termCodeEntry, applNo, seqNo)
