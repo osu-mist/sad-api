@@ -48,14 +48,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(1)
             try {
-                while (result.next()) {
+                while (result?.next()) {
                     sadList.add(map(result))
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sadList
     }
@@ -72,14 +72,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(1)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
@@ -134,7 +134,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
                 result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
@@ -152,14 +152,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(5)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
