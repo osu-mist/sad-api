@@ -18,7 +18,9 @@ import oracle.sql.DATE
 /**
  * Sad database access object class.
  */
-class SadDAO extends AbstractSadDAO implements Managed {
+class SadDAO
+        extends AbstractSadDAO // defined in private repository for legal reasons
+        implements Managed {
     private SadApplicationConfiguration configuration
     private Environment environment
     private Handle handle
