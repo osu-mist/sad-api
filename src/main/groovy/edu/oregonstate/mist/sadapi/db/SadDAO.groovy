@@ -23,6 +23,7 @@ class SadDAO extends AbstractSadDAO implements Managed {
     private Environment environment
     private Handle handle
     private Connection connection
+    private static final long PacificStandardTimeMillisecondOffset = 1000*60*60*8
 
     /**
      * Constructs the object after receiving and storing configuration and environment variables.
@@ -256,7 +257,6 @@ class SadDAO extends AbstractSadDAO implements Managed {
      * @return Oracle DATE
      */
     private static DATE toDATE(Date date) {
-        long PacificStandardTimeMillisecondOffset = 1000*60*60*8
         new DATE(new java.sql.Date(date.getTime() + PacificStandardTimeMillisecondOffset))
     }
 }
