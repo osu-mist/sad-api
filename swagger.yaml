@@ -1,21 +1,183 @@
 swagger: '2.0'
 info:
-  title: Web API Skeleton
-  description: Skeleton for Dropwizard Web APIs
+  title: Student Application Decision Web API
+  description: Web API for creating, reading, updating, and deleting student application decision codes.
   version: '0.0'
+  license:
+    name: GNU Affero General Public License Version 3
+    url: https://www.gnu.org/licenses/agpl-3.0.html
 externalDocs:
   description: GitHub Repository
-  url: https://github.com/osu-mist/web-api-skeleton
-host: localhost
+  url: https://github.com/osu-mist/sad-api
 schemes:
-  - http
+  - https
+basePath: /api/v0
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
   /:
+    post:
+      summary: Create student application decisions
+      parameters:
+        - name: sad
+          in: body
+          schema:
+            $ref: '#/definitions/Sad'
+          required: true
+      responses:
+        201:
+          description: created
+          schema:
+            $ref: '#/definitions/Sad'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/Error'
+  /{pidm}:
     get:
-      summary: Sample Resource
-      description: This is a sample resource that returns a short message.
+      summary: Read student application decisions
+      parameters:
+        - name: pidm
+          in: path
+          type: integer
+          required: true
       responses:
         200:
-          description: A short message
+          description: ok
           schema:
-            type: string
+            type: array
+            items:
+              $ref: '#/definitions/Sad'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update student application decisions
+      parameters:
+        - name: pidm
+          in: path
+          type: integer
+          required: true
+        - name: sad
+          in: body
+          schema:
+            $ref: '#/definitions/Sad'
+          required: true
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/Sad'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error'
+  /{pidm}?termCodeEntry=[tce]&applNo=[an]&seqNo=[sn]:
+    get:
+      summary: Read student application decisions
+      parameters:
+        - name: pidm
+          in: path
+          type: integer
+          required: true
+        - name: termCodeEntry
+          in: query
+          type: string
+          required: true
+        - name: applNo
+          in: query
+          type: integer
+          required: true
+        - name: seqNo
+          in: query
+          type: integer
+          required: true
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/Sad'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete student application decisions
+      parameters:
+        - name: pidm
+          in: path
+          type: integer
+          required: true
+        - name: termCodeEntry
+          in: query
+          type: string
+          required: true
+        - name: applNo
+          in: query
+          type: integer
+          required: true
+        - name: seqNo
+          in: query
+          type: integer
+          required: true
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/Sad'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Sad:
+    properties:
+      pidm:
+        type: integer
+        format: int64
+      termCodeEntry:
+        type: string
+      applNo:
+        type: integer
+        format: int64
+      seqNo:
+        type: integer
+        format: int64
+      apdcDate:
+        type: string
+        format: date
+      apdcCode:
+        type: string
+      maintInd:
+        type: string
+  Error:
+    properties:
+      status:
+        type: integer
+      developerMessage:
+        type: string
+      userMesage:
+        type: string
+      code:
+        type: integer
+      details:
+        type: string
