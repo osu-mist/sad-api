@@ -10,6 +10,7 @@ import org.skife.jdbi.v2.Handle
 import java.sql.Connection
 import java.sql.CallableStatement
 import java.sql.ResultSet
+import java.sql.SQLException
 import oracle.jdbc.OracleTypes
 import oracle.jdbc.OracleCallableStatement
 import oracle.sql.DATE
@@ -47,14 +48,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(1)
             try {
-                while (result.next()) {
+                while (result?.next()) {
                     sadList.add(map(result))
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sadList
     }
@@ -71,19 +72,20 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(1)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
 
-    public Sad update(Long pidm, String termCodeEntry, Long applNo, Long seqNo, Date apdcDate, String apdcCode, String maintInd) {
+    public Sad update(Long pidm, String termCodeEntry, Long applNo, Long seqNo, Date apdcDate, String apdcCode, String maintInd)
+            throws SQLException, IllegalArgumentException {
         Sad sad = null
         OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(UPDATE)
         try {
@@ -98,19 +100,20 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(8)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
 
-    public Sad create(Long pidm, String termCodeEntry, Long applNo, Date apdcDate, String apdcCode, String maintInd) {
+    public Sad create(Long pidm, String termCodeEntry, Long applNo, Date apdcDate, String apdcCode, String maintInd)
+            throws SQLException, IllegalArgumentException {
         Sad sad = null
         OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(CREATE)
         try {
@@ -124,19 +127,20 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(7)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
 
-    public Sad delete(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
+    public Sad delete(Long pidm, String termCodeEntry, Long applNo, Long seqNo)
+            throws SQLException {
         Sad sad = null
         CallableStatement statement = connection.prepareCall(DELETE)
         try {
@@ -148,14 +152,14 @@ class SadDAO extends AbstractSadDAO implements Managed {
             statement.execute()
             ResultSet result = (ResultSet)statement.getObject(5)
             try {
-                if (result.next()) {
+                if (result?.next()) {
                     sad = map(result)
                 }
             } finally {
-                result.close()
+                result?.close()
             }
         } finally {
-            statement.close()
+            statement?.close()
         }
         sad
     }
