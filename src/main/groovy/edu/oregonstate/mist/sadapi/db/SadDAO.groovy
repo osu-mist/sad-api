@@ -25,7 +25,7 @@ class SadDAO
     private Environment environment
     private Handle handle
     private Connection connection
-    private static final long PacificStandardTimeMillisecondOffset = 1000*60*60*8
+    private static final long pacificStandardTimeMillisecondOffset = 1000*60*60*8
 
     /**
      * Constructs the object after receiving and storing configuration and environment variables.
@@ -259,6 +259,6 @@ class SadDAO
      * @return Oracle DATE
      */
     private static DATE toDATE(Date date) {
-        new DATE(new java.sql.Date(date.getTime() + PacificStandardTimeMillisecondOffset))
+        new DATE(new java.sql.Date(date.getTime() + pacificStandardTimeMillisecondOffset))
     }
 }
