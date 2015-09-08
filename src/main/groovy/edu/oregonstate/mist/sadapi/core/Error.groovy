@@ -1,5 +1,8 @@
 package edu.oregonstate.mist.sadapi.core
 
+/**
+ * Error representation class.
+ */
 class Error {
     Integer status
     String developerMessage

@@ -18,14 +18,31 @@ import javax.ws.rs.core.Response.ResponseBuilder
 import javax.ws.rs.core.MediaType
 import java.sql.SQLException
 
+/**
+ * Sad resource class.
+ */
 @Path('/')
 class SadResource {
     private SadDAO sadDAO
 
+    /**
+     * Constructs the object after receiving and storing the SadDAO instance.
+     *
+     * @param sadDAO
+     */
     public SadResource(SadDAO sadDAO) {
         this.sadDAO = sadDAO
     }
 
+    /**
+     * Responds to GET requests by reading and returning a Sad or a list of Sads.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param seqNo
+     * @return response containing the result or error message
+     */
     @GET
     @Path('{pidm: \\d+}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,6 +63,13 @@ class SadResource {
         responseBuilder.build()
     }
 
+    /**
+     * Responds to PUT requests by updating and returning a Sad.
+     *
+     * @param pidm
+     * @param sad
+     * @return response containing the result or error message
+     */
     @PUT
     @Path('{pidm: \\d+}')
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +85,12 @@ class SadResource {
         responseBuilder.build()
     }
 
+    /**
+     * Responds to POST requests by creating and returning a Sad.
+     *
+     * @param sad
+     * @return response containing the result or error message
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -75,6 +105,15 @@ class SadResource {
         responseBuilder.build()
     }
 
+    /**
+     * Responds to DELETE requests by deleting and returning a Sad.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param seqNo
+     * @return response containing the result or error message
+     */
     @DELETE
     @Path('{pidm: \\d+}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,16 +131,33 @@ class SadResource {
         responseBuilder.build()
     }
 
+    /**
+     * Returns a builder for an HTTP 200 ("ok") response with the argument entity as body.
+     *
+     * @param entity
+     * @return ok response builder
+     */
     private static ResponseBuilder ok(Object entity) {
         ResponseBuilder responseBuilder = Response.ok()
         responseBuilder.entity(entity)
     }
 
+    /**
+     * Returns a builder for an HTTP 201 ("created") response with the argument entity as body.
+     *
+     * @param entity
+     * @return created response builder
+     */
     private static ResponseBuilder created(Object entity) {
         ResponseBuilder responseBuilder = Response.status(Response.Status.CREATED)
         responseBuilder.entity(entity)
     }
 
+    /**
+     * Returns a builder for an HTTP 404 ("not found") response with an error message as body.
+     *
+     * @return not found response builder
+     */
     private static ResponseBuilder notFound() {
         ResponseBuilder responseBuilder = Response.status(Response.Status.NOT_FOUND)
         responseBuilder.entity(new Error(
@@ -113,6 +169,12 @@ class SadResource {
         ))
     }
 
+    /**
+     * Returns a builder for an HTTP 400 ("bad request") response with an error message as body.
+     *
+     * @param message
+     * @return bad request response builder
+     */
     private static ResponseBuilder badRequest(String message) {
         ResponseBuilder responseBuilder = Response.status(Response.Status.BAD_REQUEST)
         responseBuilder.entity(new Error(

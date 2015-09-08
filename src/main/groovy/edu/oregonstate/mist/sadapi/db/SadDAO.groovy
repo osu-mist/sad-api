@@ -15,17 +15,32 @@ import oracle.jdbc.OracleTypes
 import oracle.jdbc.OracleCallableStatement
 import oracle.sql.DATE
 
-class SadDAO extends AbstractSadDAO implements Managed {
+/**
+ * Sad database access object class.
+ */
+class SadDAO
+        extends AbstractSadDAO // defined in private repository for legal reasons
+        implements Managed {
     private SadApplicationConfiguration configuration
     private Environment environment
     private Handle handle
     private Connection connection
+    private static final long pacificStandardTimeMillisecondOffset = 1000*60*60*8
 
+    /**
+     * Constructs the object after receiving and storing configuration and environment variables.
+     *
+     * @param configuration
+     * @param environment
+     */
     public SadDAO(SadApplicationConfiguration configuration, Environment environment) {
         this.configuration = configuration
         this.environment = environment
     }
 
+    /**
+     * Initializes the database connection and stores the JDBC object.
+     */
     @Override
     public void start() {
         DBIFactory factory = new DBIFactory()
@@ -34,14 +49,23 @@ class SadDAO extends AbstractSadDAO implements Managed {
         connection = handle.getConnection()
     }
 
+    /**
+     * Closes the database connection.
+     */
     @Override
     public void stop() {
         handle.close()
     }
 
+    /**
+     * Returns all Sads with the given pidm.
+     *
+     * @param pidm
+     * @return list of Sads found, otherwise empty
+     */
     public List<Sad> queryAll(Long pidm) {
         List<Sad> sadList = new ArrayList<Sad>()
-        CallableStatement statement = connection.prepareCall(QUERY_ALL)
+        CallableStatement statement = connection.prepareCall(super.QUERY_ALL)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -60,9 +84,18 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sadList
     }
 
+    /**
+     * Returns the Sad with the given pidm, term code entry, application number, and sequence number.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param seqNo
+     * @return found Sad, otherwise null
+     */
     public Sad queryOne(Long pidm, String termCodeEntry, Long applNo, Long seqNo) {
         Sad sad = null
-        CallableStatement statement = connection.prepareCall(QUERY_ONE)
+        CallableStatement statement = connection.prepareCall(super.QUERY_ONE)
         try {
             statement.registerOutParameter(1, OracleTypes.CURSOR)
             statement.setLong(2, pidm)
@@ -84,10 +117,24 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sad
     }
 
+    /**
+     * Updates the Sad and returns it.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param seqNo
+     * @param apdcDate
+     * @param apdcCode
+     * @param maintInd
+     * @return updated Sad, otherwise null
+     * @throws SQLException
+     * @throws IllegalArgumentException
+     */
     public Sad update(Long pidm, String termCodeEntry, Long applNo, Long seqNo, Date apdcDate, String apdcCode, String maintInd)
             throws SQLException, IllegalArgumentException {
         Sad sad = null
-        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(UPDATE)
+        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(super.UPDATE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -112,10 +159,23 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sad
     }
 
+    /**
+     * Creates the Sad and returns it.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param apdcDate
+     * @param apdcCode
+     * @param maintInd
+     * @return created Sad, otherwise null
+     * @throws SQLException
+     * @throws IllegalArgumentException
+     */
     public Sad create(Long pidm, String termCodeEntry, Long applNo, Date apdcDate, String apdcCode, String maintInd)
             throws SQLException, IllegalArgumentException {
         Sad sad = null
-        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(CREATE)
+        OracleCallableStatement statement = (OracleCallableStatement)connection.prepareCall(super.CREATE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -139,10 +199,20 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sad
     }
 
+    /**
+     * Deletes the Sad and returns it.
+     *
+     * @param pidm
+     * @param termCodeEntry
+     * @param applNo
+     * @param seqNo
+     * @return deleted Sad, otherwise null
+     * @throws SQLException
+     */
     public Sad delete(Long pidm, String termCodeEntry, Long applNo, Long seqNo)
             throws SQLException {
         Sad sad = null
-        CallableStatement statement = connection.prepareCall(DELETE)
+        CallableStatement statement = connection.prepareCall(super.DELETE)
         try {
             statement.setLong(1, pidm)
             statement.setString(2, termCodeEntry)
@@ -164,19 +234,31 @@ class SadDAO extends AbstractSadDAO implements Managed {
         sad
     }
 
+    /**
+     * Returns the current result as a Sad.
+     *
+     * @param result
+     * @return Sad result
+     */
     private static Sad map(ResultSet result) {
         new Sad(
-                pidm:          result.getLong(PIDM),
-                termCodeEntry: result.getString(TERMCODEENTRY),
-                applNo:        result.getLong(APPLNO),
-                seqNo:         result.getLong(SEQNO),
-                apdcDate:      result.getDate(APDCDATE),
-                apdcCode:      result.getString(APDCCODE),
-                maintInd:      result.getString(MAINTIND)
+                pidm:          result.getLong(super.PIDM),
+                termCodeEntry: result.getString(super.TERMCODEENTRY),
+                applNo:        result.getLong(super.APPLNO),
+                seqNo:         result.getLong(super.SEQNO),
+                apdcDate:      result.getDate(super.APDCDATE),
+                apdcCode:      result.getString(super.APDCCODE),
+                maintInd:      result.getString(super.MAINTIND)
         )
     }
 
+    /**
+     * Returns the oracle.sql.DATE represented by the java.util.Date argument.
+     *
+     * @param date
+     * @return Oracle DATE
+     */
     private static DATE toDATE(Date date) {
-        new DATE(new java.sql.Date(date.getTime() + 1000*60*60*8))
+        new DATE(new java.sql.Date(date.getTime() + pacificStandardTimeMillisecondOffset))
     }
 }

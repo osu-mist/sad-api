@@ -100,7 +100,7 @@ Return one student application decision for a given pidm, term code, application
     
     {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2014-11-26","apdcCode":"OQ","maintInd":"S"}
 
-### POST
+### POST /
 
 Create student application decision:
 
@@ -119,7 +119,7 @@ Create student application decision:
     
     {"pidm":1311112,"termCodeEntry":"201601","applNo":2,"seqNo":2,"apdcDate":"2015-08-12","apdcCode":"AX","maintInd":"S"}
 
-### PUT
+### PUT /{pidm}
 
 Update student application decision:
 
@@ -138,7 +138,7 @@ Update student application decision:
     
     {"pidm":1320366,"termCodeEntry":"201600","applNo":1,"seqNo":1,"apdcDate":"2015-08-13","apdcCode":"AT","maintInd":"S"}
 
-### DELETE
+### DELETE /{pidm}?termCodeEntry={tce}&applNo={an}&seqNo={sn}
 
 Delete student application decision:
 
